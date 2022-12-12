@@ -23,7 +23,7 @@ public class AmountPane extends VBox {
         setPrefHeight(170);
         HBox hBox = new HBox();
         Label walletLabel = new Label("Wallet");
-        bankIDLabel = new Label();
+        this.bankIDLabel = new Label();
         hBox.getChildren().add(walletLabel);
         hBox.getChildren().add(bankIDLabel);
         walletLabel.setStyle("-fx-font: 20 sansserif; -fx-font-weight: bold;");
@@ -42,6 +42,7 @@ public class AmountPane extends VBox {
         totalAmount.updateAmount(total);
     }
 
+    // sets the bankID label with agent bank account ID number
     public void setBankIDLabel(int bankID) {
         bankIDLabel.setText("bankID: "+bankID);
     }

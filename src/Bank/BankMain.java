@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class BankMain extends Application{
     public static void main(String[] args){
         launch(args);
     }

@@ -2,8 +2,12 @@ package Agent;
 
 import Bank.ClientAdress;
 
-import java.io.*;
-import java.net.*;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.SocketException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
@@ -46,6 +50,7 @@ public class Agent implements Runnable{
                 Object object = inMessage.readObject();
                 if (object instanceof ClientAdress client){
                     Socket auctionSocket = new Socket(client.getipAdress(), client.getPortNumber());
+                    //Socket auctionSocket = new Socket("DEIMOS", 5090);//client.getipAdress(), client.getPortNumber());
                     System.out.println("Connected to Auction House" + (i + 1) + ".");
                     ItemWatcher itemWatcher = new ItemWatcher(auctionSocket, i, accountId);
                     i++;

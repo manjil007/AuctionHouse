@@ -38,14 +38,17 @@ public class AuctionItemGUI extends VBox {
         hBox.getChildren().add(itemTitle);
         hBox.getChildren().add(timerLabel);
 
+        Image image = new Image(this.auctionItemImage);
         ImageView itemImage = new ImageView();
-        itemImage.setImage(new Image(this.auctionItemImage));
+        itemImage.setImage(image);
         itemImage.setFitHeight(300);
         itemImage.setFitWidth(300);
+
 
         amountBox = new AmountBox("Current Bid",0.00);
         amountBox.setColor("#ebbfb5");
 
+        // Bid status update
         bidStatus = new VBox();
         bidStatus.setStyle("-fx-border-color: #bababa");
         Label statusTitle = new Label(" Bid Status");

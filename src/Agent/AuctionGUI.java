@@ -41,12 +41,14 @@ public class AuctionGUI extends VBox {
         return false;
     }
 
+    // updates pane with current item
     public void reloadItem() {
         if (!auctionItemPane.isEmpty()) {
             addToStage(auctionItemPane.get(itemIndex));
         }
     }
 
+    // Switches to next item
     public void getNextItem() {
         if (auctionItemPane.isEmpty()) return;
         getChildren().clear();
@@ -55,6 +57,7 @@ public class AuctionGUI extends VBox {
         addToStage(auctionItemPane.get(itemIndex));
     }
 
+    // Switches to previous item
     public void getPrevItem() {
         if (auctionItemPane.isEmpty()) return;
         getChildren().clear();

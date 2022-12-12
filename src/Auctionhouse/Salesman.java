@@ -36,8 +36,7 @@ public class Salesman extends HashMap<String, AuctionBidManager> implements Runn
                 synchronized (this){
                     wait(1000);
                     for (AuctionBidManager item : getValues()){
-                        System.out.println(item.getAuctionItemName() + "for"/* TODO */);
-                        // TODO item.timePassed()
+                        item.timeOver();
                         if (item.getRemainingTime() == 0){
                             item.setBidOver(true);
                             client.add(item);

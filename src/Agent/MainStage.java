@@ -23,24 +23,28 @@ public class MainStage extends VBox {
         addToStage(wallet);
     }
 
+    // Add new auction house pane
     public void addAuctionHouse(AuctionGUI auctionPane) {
         auctionHouses.getTabs().add(new Tab("AH"+ahNumber,auctionPane));
         tabs.add(auctionPane);
         ahNumber++;
     }
 
+    // Navigates to next AH item
     public void navigateNext() {
         if (!tabs.isEmpty()) {
             tabs.get(getCurrentAH()).getNextItem();
         }
     }
 
+    // Navigates to previous AH item
     public void navigatePrev() {
         if (!tabs.isEmpty()) {
             tabs.get(getCurrentAH()).getPrevItem();
         }
     }
 
+    // gets current AH index
     public int getCurrentAH() {
         return auctionHouses.getSelectionModel().getSelectedIndex();
     }

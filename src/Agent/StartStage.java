@@ -2,7 +2,6 @@ package Agent;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -24,12 +23,12 @@ public class StartStage extends VBox {
         addToPane(prompt);
 
         TextField nameField = new TextField();
-        nameField.setPromptText("\uD83D\uDC64 Name");
+        nameField.setPromptText("\uD83D\uDC64 FullName");
         nameField.setPrefHeight(20);
         nameField.setFocusTraversable(false);
 
         TextField balanceField = new TextField();
-        balanceField.setPromptText("\uD83D\uDCB2 Balance");
+        balanceField.setPromptText("\uD83D\uDCB2 Amount");
         balanceField.setPrefHeight(20);
         balanceField.setFocusTraversable(false);
 
@@ -38,6 +37,7 @@ public class StartStage extends VBox {
         submit.setDisable(true);
         submit.setFocusTraversable(false);
         submit.setStyle("-fx-base: #e07a55; -fx-text-fill: white");
+        submit.setDisable(balanceField.getText().equals("") && nameField.getText().matches("^[0-9]+$"));
         submit.setOnAction(event -> {
             if (!balanceField.getText().equals("") &&
                     !nameField.getText().matches("^[0-9]+$")) {
@@ -48,15 +48,9 @@ public class StartStage extends VBox {
             }
         });
 
-        CheckBox agree = new CheckBox("I agree to the Terms of Service.");
-        agree.setOnAction(event -> {
-            submit.setDisable(!agree.isSelected());
-        });
-        agree.setFocusTraversable(false);
 
         addToPane(nameField);
         addToPane(balanceField);
-        addToPane(agree);
         addToPane(submit);
     }
 

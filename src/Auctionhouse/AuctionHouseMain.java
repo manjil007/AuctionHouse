@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class AuctionHouseMain extends Application {
     private String ip;
     private int port;
     private String inventory;
@@ -22,24 +22,18 @@ public class Main extends Application {
         primaryStage.setTitle("Auction House");
         primaryStage.show();
 
-        ip = args[0];
-        port = Integer.parseInt(args[1]);
-        inventory = args[2];
+        args = getParameters().getRaw().toArray(new String[2]);
+        ip = args[0]; //bank ip
+        port = Integer.parseInt(args[1]);  //bank port no
+        inventory = args[2]; //.txt file of inventory
 
         AuctionHouse auctionHouse = new AuctionHouse(ip, port, inventory);
         (new Thread(auctionHouse)).start();
-
-        primaryStage.setTitle(getItemTypes());
-
         Label idLabel = new Label("Bank ID#: " + auctionHouse.getBankId());
         pane.getChildren().addAll(idLabel);
         primaryStage.setOnCloseRequest(event -> {
             System.exit(0);
         });
 
-    }
-
-    private String getItemTypes(){
-        return null;
     }
 }

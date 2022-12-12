@@ -2,10 +2,7 @@ package Auctionhouse;
 
 import Bank.ClientAdress;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -16,8 +13,8 @@ import java.util.Scanner;
 public class AuctionHouse implements Runnable{
     private Socket socket;
     private ServerSocket server;
-    private HashMap<Integer, ObjectOutputStream> agents;
-    private Items items;
+    private HashMap<Integer, ObjectOutputStream> agents = new HashMap<>();
+    private Items items = new Items();
     private Salesman salesman;
     private Client client;
     private int bankId;
@@ -25,10 +22,13 @@ public class AuctionHouse implements Runnable{
 
     public AuctionHouse(String serverIp, int serverPort, String allItems){
         try{
+            //File itemList = new File(allItems + ".txt");
+//            File itemList = new File("resources/cricket.txt");
             InputStream itemList = AuctionHouse.class.getResourceAsStream("/"+allItems+".txt");
             Scanner scan = new Scanner(itemList);
             while (scan.hasNext()){
-                AuctionBidManager auctionItems = new AuctionBidManager(scan.nextLine(), 15);
+                AuctionBidManager auctionItems = new AuctionBidManager(scan.nextLine(), 50);
+                items.add(auctionItems);
             }
             Collections.shuffle(items);
             scan.close();
@@ -39,9 +39,10 @@ public class AuctionHouse implements Runnable{
             ObjectInputStream bankReader = new ObjectInputStream(socket.getInputStream());
 
             bankWriter.writeObject("auction");
-            server = new ServerSocket(9090);
-            bankWriter.writeObject(new ClientAdress(InetAddress.getLocalHost().getHostAddress(), server.getLocalPort()));
-            bankId = (Integer) bankReader.readObject();
+            server = new ServerSocket(5090);
+            bankWriter.writeObject(new ClientAdress(InetAddress.getLocalHost().getHostName(), server.getLocalPort()));
+//            bankWriter.writeObject(new ClientAdress("DEIMOS", 5090));//InetAddress.getLocalHost().getHostAddress(), server.getLocalPort()));
+            this.bankId = (Integer) bankReader.readObject();
 
             client = new Client(agents, bankWriter, bankId);
             salesman = new Salesman(client, items);
@@ -90,6 +91,6 @@ public class AuctionHouse implements Runnable{
         }
     }
     public int getBankId(){
-        return bankId;
+        return this.bankId;
     }
 }

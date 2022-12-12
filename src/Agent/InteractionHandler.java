@@ -14,19 +14,21 @@ public class InteractionHandler extends VBox {
 
     public InteractionHandler(Slider bidSlider, Button placeBid,
                            Button back, Button next) {
-
+        // Navigation between items, back/next buttons
         HBox navigate = new HBox();
         navigate.setStyle("-fx-padding: 0 20 15 20; -fx-background-color: white");
         navigate.setSpacing(20);
         navigate.getChildren().add(back);
         navigate.getChildren().add(next);
 
+        // Holds bid selection, slider, and submit button
         HBox bid = new HBox();
         bid.setStyle("-fx-padding: 10 20 10 20");
         bid.setSpacing(20);
         bid.getChildren().add(agentBid);
         bid.getChildren().add(placeBid);
 
+        // Bid slider display
         agentBid.setAlignment(Pos.CENTER);
         agentBid.setText("$0.00");
         agentBid.setStyle("-fx-background-color: #d1d1d1;" +

@@ -56,7 +56,6 @@ public class ItemWatcher implements Runnable {
             }
         }catch(SocketException | EOFException e) {
             System.out.println("AuctionHouse Closed");
-            closeAuction();
         }catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }

@@ -2,7 +2,9 @@ package Bank;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -28,8 +30,12 @@ public class BankManager implements Runnable{
     public void run() {
         try {
             serverSocket = new ServerSocket(9090);
-            portNo = 9090;
-            ipAddress = "2603:3000:6:d700:e0c4:84a5:4f8e:f9b9";
+            portNo = serverSocket.getLocalPort();
+            ipAddress = InetAddress.getLocalHost().getHostAddress();
+//            portNo = 9090; // bank own port no
+//            ipAddress = "PROSPERO"; //bank own host
+            System.out.println(portNo);
+            System.out.println(ipAddress);
 
             Runnable handler = () ->{
                 try{

@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.*;
+import java.util.HashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ClientAccount implements Runnable{
@@ -41,9 +41,10 @@ public class ClientAccount implements Runnable{
 
             String msg = (String) inputStream.readObject();
 
-            if (msg.equals("Auction")){
+            if (msg.equals("auction")){
                 System.out.println("Connected to Auction House");
                 ClientAdress clientAdress = (ClientAdress) inputStream.readObject();
+                System.out.println(clientAdress.getipAdress() + " " + clientAdress.getPortNumber());
                 auctionHouseAddresses.put(acctNumber, clientAdress);
                 writer.writeObject(acctNumber);
 
@@ -87,7 +88,7 @@ public class ClientAccount implements Runnable{
             clients.remove(acctNumber);
             accounts.remove(acctNumber);
         }
-        catch(IOException | ClassNotFoundException e){ //might need to catch other errors.
+        catch(IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
     }
